@@ -3,108 +3,172 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Islamic Library</title>
+<title>Furkaan | Advanced Website</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: Arial,sans-serif; }
-body { background:#f9f9f9; }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
-/* Header */
-.header { background:#005f4f; color:white; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; }
-.header h1 { font-size:24px; }
-.header input { padding:8px; border-radius:20px; border:none; width:200px; }
+body{
+  background:#0f0f0f;
+  color:white;
+  scroll-behavior:smooth;
+}
 
-/* Layout */
-.container { display:flex; padding:20px; }
+/* Navbar */
+nav{
+  background:#111;
+  padding:15px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:1000;
+  box-shadow:0 0 10px #000;
+}
 
-/* Sidebar */
-.sidebar { width:20%; }
-.sidebar ul { list-style:none; }
-.sidebar li { padding:12px 0; cursor:pointer; transition:0.2s; }
-.sidebar li:hover { color:#005f4f; font-weight:bold; }
+nav h2{
+  color:#00ffcc;
+}
 
-/* Feed */
-.feed { width:55%; margin:0 20px; }
-.book-box { background:white; padding:15px; border-radius:12px; margin-bottom:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-.book-box img { width:100%; border-radius:10px; margin-top:10px;}
-.book-box h3 { margin-bottom:5px;}
-.book-box p { margin-bottom:10px; color:#555;}
-.actions button { margin-right:10px; padding:6px 12px; border:none; background:#e4e6eb; border-radius:5px; cursor:pointer; transition:0.2s; }
-.actions button:hover { background:#d8dadf; }
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+  transition:0.3s;
+}
 
-/* Right Sidebar */
-.rightbar { width:25%; }
-.rightbar h3 { margin-bottom:10px; }
-.author { background:white; padding:12px; border-radius:8px; margin-bottom:10px; box-shadow:0 1px 3px rgba(0,0,0,0.1); }
+nav a:hover{
+  color:#00ffcc;
+}
 
-/* Responsive */
-@media(max-width:900px) { .sidebar,.rightbar { display:none; } .feed { width:100%; margin:0; }
+/* Hero Section */
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  background:linear-gradient(135deg,#000000,#1a1a1a);
+}
+
+.hero h1{
+  font-size:50px;
+  color:#00ffcc;
+}
+
+.hero p{
+  margin-top:15px;
+  color:#ccc;
+}
+
+.btn{
+  margin-top:25px;
+  padding:12px 25px;
+  background:#00ffcc;
+  color:black;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:white;
+  transform:scale(1.05);
+}
+
+/* Contact Section */
+.contact{
+  padding:100px 20px;
+  text-align:center;
+}
+
+.contact h2{
+  margin-bottom:30px;
+  color:#00ffcc;
+}
+
+input, textarea{
+  width:90%;
+  max-width:500px;
+  padding:12px;
+  margin:10px 0;
+  background:#1a1a1a;
+  border:1px solid #333;
+  color:white;
+  border-radius:10px;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:#111;
+  color:#777;
 }
 </style>
 </head>
-
 <body>
 
-<div class="header">
-<h1>Islamic Library</h1>
-<input type="text" placeholder="Search Books">
-</div>
+<nav>
+  <h2>Furkaan</h2>
+  <div>
+    <a href="#">Home</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-<div class="container">
+<section class="hero">
+  <h1>Welcome to Furkaan's Website</h1>
+  <p>Advanced Dark Theme Website with Auto WhatsApp Message</p>
+  <button class="btn" onclick="scrollToContact()">Contact Me</button>
+</section>
 
-<div class="sidebar">
-<ul>
-<li>📖 Quran</li>
-<li>📚 Hadith</li>
-<li>🕌 Fiqh</li>
-<li>📜 History</li>
-<li>👳 Biographies</li>
-</ul>
-</div>
+<section class="contact" id="contact">
+  <h2>Send Message</h2>
+  
+  <input type="text" id="name" placeholder="Your Name" required>
+  <input type="text" id="message" placeholder="Your Message" required>
+  
+  <br>
+  <button class="btn" onclick="sendMessage()">Send to Furkaan</button>
+</section>
 
-<div class="feed">
-<div id="books"></div>
-</div>
-
-<div class="rightbar">
-<h3>Popular Authors</h3>
-<div class="author">Imam Al-Ghazali</div>
-<div class="author">Ibn Kathir</div>
-<div class="author">Muhammad Al-Tirmidhi</div>
-<div class="author">Sayyid Qutb</div>
-</div>
-
-</div>
+<footer>
+  © 2026 Furkaan | All Rights Reserved
+</footer>
 
 <script>
-let books = [
-{title:"Tafsir Ibn Kathir", desc:"Classic commentary on the Quran by Ibn Kathir.", likes:0, image:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Tafsir_ibn_kathir.jpg/320px-Tafsir_ibn_kathir.jpg"},
-{title:"Riyad-us-Saliheen", desc:"Collection of Hadith compiled by Imam An-Nawawi.", likes:0, image:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Riyad-us-Saliheen_cover.jpg/320px-Riyad-us-Saliheen_cover.jpg"},
-{title:"Fiqh us-Sunnah", desc:"Comprehensive guide on Islamic jurisprudence.", likes:0, image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Fiqh-us-Sunnah.jpg/320px-Fiqh-us-Sunnah.jpg"}
-];
-
-function renderBooks(){
-const booksDiv = document.getElementById("books");
-booksDiv.innerHTML="";
-books.forEach((book,index)=>{
-const div=document.createElement("div");
-div.className="book-box";
-div.innerHTML=`<h3>${book.title}</h3>
-<p>${book.desc}</p>
-<img src="${book.image}" alt="${book.title}">
-<div class="actions">
-<button onclick="likeBook(${index},this)">👍 Like (${book.likes})</button>
-</div>`;
-booksDiv.appendChild(div);
-});
+function scrollToContact(){
+  document.getElementById("contact").scrollIntoView({behavior:"smooth"});
 }
 
-function likeBook(index,btn){
-books[index].likes++;
-btn.innerText=`👍 Like (${books[index].likes})`;
-}
+function sendMessage(){
+  var name = document.getElementById("name").value;
+  var message = document.getElementById("message").value;
 
-renderBooks();
+  if(name==="" || message===""){
+    alert("Please fill all fields!");
+    return;
+  }
+
+  var phoneNumber = "919682512166"; // 91 for India
+  var text = "Hello Furkaan,%0AName: " + name + "%0AMessage: " + message;
+
+  var whatsappURL = "https://wa.me/" + phoneNumber + "?text=" + text;
+  
+  window.open(whatsappURL, "_blank");
+}
 </script>
 
 </body>
